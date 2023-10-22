@@ -1,17 +1,11 @@
+use polars::prelude::*;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn add(a: i32, b: i32) -> i32 {
-  return a + b;
-}
+pub fn add_vector(x: Vec<i32>, y: Vec<i32>) -> Option<Vec<i32>> {
+  let x: Series = x.iter().collect();
+  let y: Series = y.iter().collect();
 
-#[cfg(test)]
-mod tests {
-  use super::*;
-
-  #[test]
-  fn it_works() {
-    let result = add(1, 2);
-    assert_eq!(result, 3);
-  }
+  let result = (&x + &y).i32().ok()?.into_no_null_iter().collect();
+  Some(result)
 }

@@ -4,6 +4,12 @@ members = [
   "rs_lib",
 ]
 
+[workspace.dependencies]
+anyhow = "1"
+chrono = "0.4"
+chrono-tz = "0.8"
+polars = { version = "0.33.2", default-features = false }
+
 [profile.release]
 codegen-units = 1
 incremental = true
